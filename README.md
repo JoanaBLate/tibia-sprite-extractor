@@ -1,10 +1,12 @@
 # Tibia Sprite Extractor
 
-Simple tool (one file only - JavaScript) for sprite ripping of the game Tibia.
+Simple tool (one short JavaScript only) for sprite ripping of the game Tibia.
 
 Run it with: deno run --allow-read --allow-write tibia-extractor.js
 
-Expects that the **subfolder sprites** exists.
+The subfolder **sprites/** must exist.
+
+You can install Deno here: https://deno.com/runtime
 
 Adjust the variables *sprFile* and *outDir* if needed.
 
@@ -13,6 +15,8 @@ You find the Tibia.spr file here: https://github.com/JoanaBLate/1098extended/blo
 ## Structure of the file Tibia.spr
 
 ([x] = Number of bytes)
+
+#### General data:
 
 [4] File Version
 
@@ -30,6 +34,8 @@ You find the Tibia.spr file here: https://github.com/JoanaBLate/1098extended/blo
 
 --- After all the offsets comes the data for each sprite
 
+#### Each sprite data:
+
 --- Each sprite begins with the color for the transparent pixels (Tibia uses fuchsia: 255, 0, 255); we don't need this color
 
 [1] Red value of the transparent color (255)
@@ -40,7 +46,7 @@ You find the Tibia.spr file here: https://github.com/JoanaBLate/1098extended/blo
 
 [2] Total size of reamining data (blocks) of the sprite
 
---- Then comes a sequence of data blocks; below we see one data block (containing 3 colored pixels)
+--- Then comes a sequence of **data blocks**; below we see one data block (containing 3 colored pixels)
 
 [2] Number of transparent pixels
 
