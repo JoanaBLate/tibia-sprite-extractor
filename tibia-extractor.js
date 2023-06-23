@@ -17,12 +17,16 @@ import BufferReader from "npm:buffer-reader"
 
 const sprFile = "Tibia.spr" // You may change the file name
 
-const outDir  = "sprites/"  // You may change the output folder
+const outDir  = "sprites"  // You may change the output folder // DON'T WRITE SLASH OR BACKSLASH
 
 
 const baseColor = { red: 255, green: 0, blue: 255, alpha: 255 }
 
+const pathSeparator = Deno.cwd().includes("\\") ? "\\" : "/"
+
 var reader
+
+var numberOfSprites 
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -32,32 +36,28 @@ function readingHandler(err, buffer)
 
     reader = new BufferReader(buffer)
     
-    const info = {
-        signature: reader.nextUInt32LE(),
-        size: reader.nextUInt16LE()
-    }
+    const signature = reader.nextUInt32LE()
+    
+    numberOfSprites = reader.nextUInt16LE()
 
-    console.log("Signature: " + info.signature)
-    console.log("  Sprites: " + info.size)
+    console.log("Signature: ", signature)
     
-    const off = info.size
+    console.log("Number of Sprites: ", numberOfSprites, "including blanks")
     
-    for (let n = 0; n < off; n++) { setTimeout(function () { createSprite(n) }, 0) }
+    createSprite(0)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 function createSprite(n) 
 {   
-  // console.log("creating sprite:", n)
-    
     const guide_index = 8 + (n * 4)
     
     reader.seek(guide_index)
 
     const address = reader.nextUInt32LE()
     
-    if (address == 0) { return } // empty sprite
+    if (address == 0) { createSprite(n + 1); return } // empty sprite
     
     const image = PNGImage.createImage(32, 32)
     
@@ -99,7 +99,12 @@ function createSprite(n)
         }
     }
     
-    image.writeImage(outDir + n + ".png")
+    image.writeImage(outDir + pathSeparator + n + ".png")
+    
+    if (n < numberOfSprites - 1) 
+    { 
+        setTimeout(function() { createSprite(n + 1) }, 0)
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -109,7 +114,7 @@ function main()
     console.log("\nRunning Tibia Sprite Extractor\n")
     console.log("  In the currrent folder it expects to find:")
     console.log("    > file 'Tibia.spr'")
-    console.log("    > EMPTY folder 'sprites/'")
+    console.log("    > EMPTY folder 'sprites'")
     console.log("  You can edit my code and change the names\n")
     console.log("  You can download 'Tibia.spr' here:")
     console.log("  https://github.com/JoanaBLate/1098extended/blob/master/dat%20and%20spr.zip\n")
