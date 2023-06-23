@@ -1,0 +1,1 @@
+# tibia-sprite-extractor
