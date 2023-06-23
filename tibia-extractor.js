@@ -28,7 +28,7 @@ var reader
 
 function readingHandler(err, buffer) 
 {
-    if (err) { throw err }
+    if (err) { console.log("An error occurred while reading '" + sprFile + "'") ; return }
 
     reader = new BufferReader(buffer)
     
@@ -42,7 +42,7 @@ function readingHandler(err, buffer)
     
     const off = info.size
     
-    for (let n = 0; n < off; n++) { createSprite(n) }
+    for (let n = 0; n < off; n++) { setTimeout(function () { createSprite(n) }, 0) }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -106,9 +106,48 @@ function createSprite(n)
 
 function main() 
 {
-     fs.readFile(sprFile, readingHandler)
+    console.log("\nRunning Tibia Sprite Extractor\n")
+    console.log("  In the currrent folder it expects to find:")
+    console.log("    > file 'Tibia.spr'")
+    console.log("    > EMPTY folder 'sprites/'")
+    console.log("  You can edit my code and change the names\n")
+    console.log("  You can download 'Tibia.spr' here:")
+    console.log("  https://github.com/JoanaBLate/1098extended/blob/master/dat%20and%20spr.zip\n")
+    
+    if (! check()) { console.log ("\nABORTING!"); return }
+    
+    console.log("  It takes a few minutes to finish\n")
+    
+    fs.readFile(sprFile, readingHandler) 
+}
+
+function check() 
+{
+    try 
+    {
+        if (! fs.existsSync(sprFile)) 
+        {
+            console.log("Cannot find file '" + sprFile + "'"); return false
+        }
+        if (! fs.existsSync(outDir)) 
+        {
+            console.log("Cannot find folder '" + outDir + "'"); return false
+        }
+        if (! fs.statSync(outDir).isDirectory())
+        {
+            console.log("'" + outDir + "' is not a folder"); return false        
+        }
+        const filenames = fs.readdirSync(outDir)
+        if (filenames.length != 0)
+        {
+            console.log("'" + outDir + "' is not empty"); return false 
+        }
+    }
+    catch (e)
+    {
+        console.log("An error occurred."); return false
+    }
+    return true
 }
 
 main()
-
-
