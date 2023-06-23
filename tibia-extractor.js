@@ -51,6 +51,8 @@ function readingHandler(err, buffer)
 
 function createSprite(n) 
 {   
+    if (n > numberOfSprites - 1) { return }
+                                  
     const guide_index = 8 + (n * 4)
     
     reader.seek(guide_index)
@@ -101,10 +103,7 @@ function createSprite(n)
     
     image.writeImage(outDir + pathSeparator + n + ".png")
     
-    if (n < numberOfSprites - 1) 
-    { 
-        setTimeout(function() { createSprite(n + 1) }, 0)
-    }
+    setTimeout(function() { createSprite(n + 1) }, 0)    
 }
 
 ///////////////////////////////////////////////////////////////////////////////
