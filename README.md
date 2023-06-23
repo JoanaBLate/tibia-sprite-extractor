@@ -44,9 +44,9 @@ You find the Tibia.spr file here: https://github.com/JoanaBLate/1098extended/blo
 
 [1] Blue value of the transparent color (255)
 
-[2] Total size of reamining data (blocks) of the sprite
+[2] Total size of reamining data of the sprite
 
---- Then comes a sequence of **data blocks**; below we see one data block (containing 3 colored pixels)
+--- Then comes a sequence of **data block**s; below we see one data block (containing 3 colored pixels)
 
 [2] Number of transparent pixels
 
