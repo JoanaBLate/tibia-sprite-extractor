@@ -5,6 +5,8 @@
 
 // run it with: deno run --allow-read --allow-write tibia-extractor.js
 // adjust the variables sprFile and outDir below if needed
+// the Tibia.spr file is here: 
+// https://github.com/JoanaBLate/1098extended/blob/master/dat%20and%20spr.zip
 
 import fs from "node:fs"
 
