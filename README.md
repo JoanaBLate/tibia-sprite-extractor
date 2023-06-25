@@ -1,3 +1,5 @@
+### IMPORTANT: The sprites copyright belongs to the Tibia creator (CipSoft GmbH).
+
 # Tibia Sprite Extractor
 
 Simple tool (one short JavaScript only) for sprite ripping of the game Tibia.
