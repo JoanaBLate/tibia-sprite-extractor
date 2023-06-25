@@ -19,9 +19,6 @@ const sprFile = "Tibia.spr" // You may change the file name
 
 const outDir  = "sprites"  // You may change the output folder // DON'T WRITE SLASH OR BACKSLASH
 
-
-const baseColor = { red: 255, green: 0, blue: 255, alpha: 255 }
-
 const pathSeparator = Deno.cwd().includes("\\") ? "\\" : "/"
 
 var reader
