@@ -12,6 +12,12 @@ Adjust the variables *sprFile* and *outDir* if needed.
 
 You find the Tibia.spr file here: https://github.com/JoanaBLate/1098extended/blob/master/dat%20and%20spr.zip
 
+## \# JUST GIVE ME THE DAMN SPRITES \#
+
+OK: https://github.com/JoanaBLate/tibia-sprite-extractor/blob/main/sprites.tar.gz
+
+Note: those sprites are numbered ignoring the blank sprites; if you want the Tibia numbering you must run the extractor.
+
 ## Structure of the file Tibia.spr
 
 ([x] = Number of bytes)
